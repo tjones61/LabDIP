@@ -18,7 +18,7 @@ public class BaggageServiceTipCalculator implements TipCalc {
             = "error: base tip must be greater than or equal to zero";
     private static final String BAG_ENTRY_ERR
             = "bag count must be greater than or equal to zero";
-    
+
     private double baseTipPerBag;
     private int bagCount;
 
