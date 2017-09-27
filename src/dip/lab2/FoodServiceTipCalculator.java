@@ -1,36 +1,39 @@
 package dip.lab2;
 
 /**
- * An example low-level class. Does this class definition follow the DIP?
- * If not, fix it.
+ * An example low-level class. Does this class definition follow the DIP? If
+ * not, fix it.
  *
  * Any other best practice violations? Fix them too.
  *
  * @author your name goes here
  */
-public class FoodServiceTipCalculator {
+public class FoodServiceTipCalculator implements TipCalc{
+
     private static final double MIN_BILL = 0.00;
-    private static final String BILL_ENTRY_ERR =
-            "Error: bill must be greater than or equal to " + MIN_BILL;
+    private static final String BILL_ENTRY_ERR
+            = "Error: bill must be greater than or equal to " + MIN_BILL;
     private static final double GOOD_RATE = 0.20;
     private static final double FAIR_RATE = 0.15;
     private static final double POOR_RATE = 0.10;
 
     private double bill;
+
     public enum ServiceQuality {
         GOOD, FAIR, POOR
     }
     private ServiceQuality serviceQuality;
 
-    public FoodServiceTipCalculator(ServiceQuality q, double billAmt) {
-        this.setServiceRating(q);
+    public FoodServiceTipCalculator(ServiceQuality quality, double billAmt) {
+        this.setServiceRating(quality);
         this.setBill(billAmt);
     }
 
+    @Override
     public double getTip() {
         double tip = 0.00; // always initialize local variables
 
-        switch(serviceQuality) {
+        switch (serviceQuality) {
             case GOOD:
                 tip = bill * GOOD_RATE;
                 break;
@@ -46,15 +49,15 @@ public class FoodServiceTipCalculator {
     }
 
     public final void setBill(double billAmt) {
-        if(billAmt < MIN_BILL) {
+        if (billAmt < MIN_BILL) {
             throw new IllegalArgumentException(BILL_ENTRY_ERR);
         }
         bill = billAmt;
     }
 
-    public final void setServiceRating(ServiceQuality q) {
+    public final void setServiceRating(ServiceQuality quality) {
         // No need to validate because enums provide type safety!
-        serviceQuality = q;
+        serviceQuality = quality;
     }
 
     public ServiceQuality getServiceQuality() {
