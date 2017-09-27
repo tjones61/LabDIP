@@ -8,15 +8,20 @@ package dip.lab2;
  *
  * @author your name goes here
  */
-public class BaggageServiceTipCalculator implements TipCalc{
+public class BaggageServiceTipCalculator implements TipCalc {
 
     private static final double GOOD_RATE = 0.20;
     private static final double FAIR_RATE = 0.15;
     private static final double POOR_RATE = 0.10;
 
+    private static final String BASE_TIP_ENTRY_ERR
+            = "error: base tip must be greater than or equal to zero";
+    private static final String BAG_ENTRY_ERR
+            = "bag count must be greater than or equal to zero";
+    
     private double baseTipPerBag;
     private int bagCount;
-    
+
     private ServiceQuality serviceQuality;
 
     public BaggageServiceTipCalculator(ServiceQuality quality, int bags) {
@@ -60,8 +65,7 @@ public class BaggageServiceTipCalculator implements TipCalc{
 
     public final void setBagCount(int bagCount) {
         if (bagCount < 0) {
-            throw new IllegalArgumentException(
-                    "bag count must be greater than or equal to zero");
+            throw new IllegalArgumentException(BAG_ENTRY_ERR);
         }
         this.bagCount = bagCount;
     }
@@ -72,8 +76,7 @@ public class BaggageServiceTipCalculator implements TipCalc{
 
     public void setBaseTipPerBag(double baseTipPerBag) {
         if (baseTipPerBag < 0) {
-            throw new IllegalArgumentException(
-                    "error: base tip must be greater than or equal to zero");
+            throw new IllegalArgumentException(BASE_TIP_ENTRY_ERR);
         }
         this.baseTipPerBag = baseTipPerBag;
     }
